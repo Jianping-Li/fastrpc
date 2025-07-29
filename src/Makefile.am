@@ -105,28 +105,15 @@ libsdsp_default_listener_la_DEPENDENCIES = libsdsprpc.la
 libsdsp_default_listener_la_LDFLAGS = libsdsprpc.la -shared -module $(USE_LOG) -version-number @LT_VERSION_NUMBER@
 libsdsp_default_listener_la_CFLAGS = $(SDSP_CFLAGS) -DUSE_SYSLOG
 
-
-bin_PROGRAMS = adsprpcd cdsprpcd sdsprpcd
-
-adsprpcddir = $(libdir)
-adsprpcd_SOURCES = adsprpcd.c
-adsprpcd_DEPENDENCIES = libadsp_default_listener.la
-adsprpcd_CFLAGS = -I$(top_srcdir)/inc -DDEFAULT_DOMAIN_ID=0 -DUSE_SYSLOG -DNO_HAL
-adsprpcd_LDADD = -ldl $(USE_LOG)
-
-
-cdsprpcddir = $(libdir)
-cdsprpcd_SOURCES = cdsprpcd.c
-cdsprpcd_DEPENDENCIES = libcdsp_default_listener.la
-cdsprpcd_CFLAGS = -I$(top_srcdir)/inc -DDEFAULT_DOMAIN_ID=3 -DUSE_SYSLOG -DNO_HAL
-cdsprpcd_LDADD =  -ldl $(USE_LOG)
-
-
-sdsprpcddir = $(libdir)
-sdsprpcd_SOURCES = sdsprpcd.c
-sdsprpcd_DEPENDENCIES = libsdsp_default_listener.la
-sdsprpcd_CFLAGS = -I$(top_srcdir)/inc -DDEFAULT_DOMAIN_ID=2 -DUSE_SYSLOG -DNO_HAL
-sdsprpcd_LDADD =  -ldl $(USE_LOG)
+bin_PROGRAMS = dsprpcd
+dsprpcddir = $(libdir)
+dsprpcd_SOURCES = dsprpcd.c
+dsprpcd_DEPENDENCIES = \
+	libadsp_default_listener.la \
+	libcdsp_default_listener.la \
+	libsdsp_default_listener.la
+dsprpcd_CFLAGS = -I$(top_srcdir)/inc -DDEFAULT_DOMAIN_ID -DUSE_SYSLOG -DNO_HAL 
+dsprpcd_LDADD =  -ldl $(USE_LOG)
 
 
 # Export fastrpc headers
