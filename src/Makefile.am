@@ -26,16 +26,9 @@ LIBDSPRPC_SOURCES = \
 		rpcmem_linux.c \
 		adspmsgd.c \
 		adspmsgd_printf.c \
-		std.c \
 		std_path.c \
-		std_mem.c \
 		std_dtoa.c \
-		std_strlprintf.c \
 		BufBound.c \
-		std_SwapBytes.c \
-		smath.c \
-		atomic.c \
-		cae.c \
 		platform_libs.c \
 		pl_list.c \
 		gpls.c \
@@ -58,9 +51,7 @@ LIBDSPRPC_SOURCES = \
 LIBDEFAULT_LISTENER_SOURCES = \
 				adsp_default_listener.c \
 				adsp_default_listener_stub.c \
-				adsp_default_listener1_stub.c \
-				std.c \
-				std_mem.c
+				adsp_default_listener1_stub.c
 
 if ANDROID_CC
 USE_LOG = -llog
@@ -127,10 +118,3 @@ sdsprpcd_SOURCES = sdsprpcd.c
 sdsprpcd_DEPENDENCIES = libsdsp_default_listener.la
 sdsprpcd_CFLAGS = -I$(top_srcdir)/inc -DDEFAULT_DOMAIN_ID=2 -DUSE_SYSLOG -DNO_HAL
 sdsprpcd_LDADD =  -ldl $(USE_LOG)
-
-
-# Export fastrpc headers
-fastrpc_includedir       = $(includedir)/fastrpc
-fastrpc_include_HEADERS  = $(top_srcdir)/inc/AEEStdErr.h
-fastrpc_include_HEADERS += $(top_srcdir)/inc/remote.h
-fastrpc_include_HEADERS += $(top_srcdir)/inc/rpcmem.h
